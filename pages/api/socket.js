@@ -8,9 +8,9 @@ const socketHandler = (req, res) => {
     const io = new Server(res.socket.server);
     res.socket.server.io = io;
     io.on("connection", (socket) => {
-      socket.on("newMessage", (message) => {
-        dummyData.push({ text: message, createAt: new Date() });
-        socket.emit("updateMessage", dummyData);
+      socket.on("newMessage", (data) => {
+        dummyData.push({ sixIp: data.sixIp, text: data.text, createAt: new Date() });
+        socket.broadcast.emit("updateMessage", dummyData);
       });
       socket.on("loadingMessage", () => {
         socket.emit("updateMessage", dummyData);

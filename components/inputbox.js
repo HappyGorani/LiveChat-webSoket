@@ -1,14 +1,18 @@
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 
+import { getSixIp } from "../api-util/getSixIp";
+
 let socket;
 
 function InputBox() {
   const userInput = useRef("");
   const [messageData, setMessageData] = useState([]);
-
+  const [sixIp, setSixIp] = useState("");
   const socketInitializer = async () => {
     await fetch("/api/socket");
+    const sixIp = await getSixIp();
+    setSixIp(sixIp);
     socket = io();
 
     socket.on("connect", () => {
@@ -28,9 +32,9 @@ function InputBox() {
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredUserInput = userInput.current.value;
-    socket.emit("newMessage", enteredUserInput);
+    socket.emit("newMessage", { text: enteredUserInput, sixIp: sixIp });
   };
-
+  console.log(messageData);
   return (
     <>
       <h1>라이브채팅</h1>
@@ -41,7 +45,10 @@ function InputBox() {
       <hr />
       <ul>
         {messageData.map((data) => (
-          <li key={data.createAt}>{data.text}</li>
+          <li key={data.createAt}>
+            {data.sixIp}
+            {data.text}
+          </li>
         ))}
       </ul>
     </>
