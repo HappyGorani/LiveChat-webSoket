@@ -1,3 +1,30 @@
-.inputbox {
+.inputbox form {
+  display: flex;
   white-space: nowrap;
+  height: 2rem;
+  line-height: 2rem;
+  width: 100%;
+  border-radius: 0 0 1rem 1rem;
+  background-color: white;
+}
+.inputbox input {
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 0.5rem;
+  border-radius: 0 0 0 1rem;
+  width: 90%;
+}
+.inputbox button {
+  height: 100%;
+  width: 10%;
+  background-color: white;
+  border-radius: 1rem;
+  transition: all 777ms ease;
+}
+.inputbox button:active {
+  transform: rotateY(360deg);
+}
+.inputbox button:hover {
+  transform: rotateY(360deg);
 }

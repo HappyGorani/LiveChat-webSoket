@@ -1,15 +1,16 @@
+import { forwardRef } from "react";
 import styles from "./messageList.module.css";
 
-function MessageList(props) {
+function MessageList(props, ref) {
   return (
-    <ul className={styles["message-list"]}>
+    <ul className={styles["message-list"]} ref={ref}>
       {props.messageData.map((data) => (
         <li key={data._id}>
-          {data.chat.sixIp}
-          {data.chat.text}
+          <p>{data.chat.sixIp}</p>
+          <p>{data.chat.text}</p>
         </li>
       ))}
     </ul>
   );
 }
-export default MessageList;
+export default forwardRef(MessageList);

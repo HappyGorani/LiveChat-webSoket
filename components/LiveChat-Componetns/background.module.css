@@ -1,6 +1,5 @@
 .background {
   user-select: none;
-
 }
 
 .background_1 {
@@ -30,6 +29,7 @@
   height: 100vh;
   clip-path: circle(14% at 50% 50%);
   background-color: rgb(255, 162, 0);
+  animation: sun 20s ease -1.25s infinite;
 }
 .sun_2 {
   position: fixed;
@@ -38,7 +38,17 @@
   width: 100vw;
   height: 100vh;
   clip-path: circle(15% at 50% 50%);
+  animation: sun 20s ease -1.25s infinite;
   background: radial-gradient(circle, rgba(255, 242, 0, 0.6), rgba(255, 125, 0, 0.9));
+}
+.moon {
+  position: fixed;
+  top: -50vh;
+  left: 50vw;
+  width: 100vw;
+  height: 100vh;
+  clip-path: circle(10% at 50% 50%);
+  background: radial-gradient(circle, rgb(255, 255, 255), rgba(255, 240, 0, 0.7));
 }
 .cloud_1 {
   position: fixed;
@@ -97,5 +107,14 @@
   }
   50% {
     opacity: 100;
+  }
+}
+@keyframes sun {
+  0%,
+  100% {
+    opacity: 100;
+  }
+  50% {
+    opacity: 0;
   }
 }

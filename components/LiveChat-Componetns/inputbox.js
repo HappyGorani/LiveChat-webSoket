@@ -6,7 +6,7 @@ function InputBox(props, ref) {
   return (
     <div className={styles.inputbox}>
       <form onSubmit={props.sendMessageHandler}>
-        <input ref={ref} />
+        <input ref={ref} placeholder='전송할 메세지를 입력하세요...'/>
         <SendButton />
       </form>
     </div>

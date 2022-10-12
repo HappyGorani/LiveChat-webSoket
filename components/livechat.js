@@ -13,7 +13,8 @@ let socket;
 function LiveChat() {
   const [messageData, setMessageData] = useState([]);
   const [sixIp, setSixIp] = useState("");
-  const userInput = useRef(null);
+  const userInputRef = useRef(null);
+  const messageScrollRef = useRef();
 
   const socketInitializer = async () => {
     await fetch("/api/socket");
@@ -33,13 +34,20 @@ function LiveChat() {
 
   useEffect(() => {
     socketInitializer();
+    autoScroll();
   }, []);
-
+  useEffect(() => {
+    autoScroll();
+  }, [messageData]);
+  const autoScroll = () => {
+    messageScrollRef.current.scrollTop = messageScrollRef.current.scrollHeight;
+  };
   const sendMessageHandler = (e) => {
     e.preventDefault();
-    const enteredUserInput = userInput.current.value;
+    const enteredUserInput = userInputRef.current.value;
     socket.emit("newMessage", { text: enteredUserInput, sixIp: sixIp });
-    userInput.current.value = "";
+    userInputRef.current.value = "";
+    autoScroll();
   };
 
   return (
@@ -47,8 +55,8 @@ function LiveChat() {
       <Background />
       <div className={styles.components}>
         <h2>LiveChat</h2>
-        <MessageList messageData={messageData} />
-        <InputBox sendMessageHandler={sendMessageHandler} ref={userInput} />
+        <MessageList messageData={messageData} ref={messageScrollRef} />
+        <InputBox sendMessageHandler={sendMessageHandler} ref={userInputRef} />
       </div>
     </>
   );
