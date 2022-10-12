@@ -1,7 +1,6 @@
 import { Server } from "Socket.IO";
 import { getChat, saveChat } from "../../helper/chatData-API";
 
-const dummyData = [];
 const socketHandler = (req, res) => {
   if (res.socket.server.io) {
     console.log("연결되었습니다.");

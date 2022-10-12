@@ -1,14 +1,20 @@
-import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
-
+import { useEffect, useState, useRef } from "react";
 import { getSixIp } from "../api-util/getSixIp";
+
+import Background from "./LiveChat-Componetns/background";
+import InputBox from "./LiveChat-Componetns/inputbox";
+import MessageList from "./LiveChat-Componetns/messageList";
+
+import styles from "./livechat.module.css";
 
 let socket;
 
-function InputBox() {
-  const userInput = useRef("");
+function LiveChat() {
   const [messageData, setMessageData] = useState([]);
   const [sixIp, setSixIp] = useState("");
+  const userInput = useRef(null);
+
   const socketInitializer = async () => {
     await fetch("/api/socket");
     const sixIp = await getSixIp();
@@ -29,28 +35,22 @@ function InputBox() {
     socketInitializer();
   }, []);
 
-  const submitHandler = (e) => {
+  const sendMessageHandler = (e) => {
     e.preventDefault();
     const enteredUserInput = userInput.current.value;
     socket.emit("newMessage", { text: enteredUserInput, sixIp: sixIp });
+    userInput.current.value = "";
   };
+
   return (
     <>
-      <h1>라이브채팅</h1>
-      <form onSubmit={submitHandler}>
-        <input ref={userInput} />
-        <button onClick={submitHandler}>go!</button>
-      </form>
-      <hr />
-      <ul>
-        {messageData.map((data) => (
-          <li key={data._id}>
-            {data.chat.sixIp}
-            {data.chat.text}
-          </li>
-        ))}
-      </ul>
+      <Background />
+      <div className={styles.components}>
+        <h2>LiveChat</h2>
+        <MessageList messageData={messageData} />
+        <InputBox sendMessageHandler={sendMessageHandler} ref={userInput} />
+      </div>
     </>
   );
 }
-export default InputBox;
+export default LiveChat;

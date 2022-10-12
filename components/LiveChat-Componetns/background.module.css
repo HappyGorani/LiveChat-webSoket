@@ -1,0 +1,101 @@
+.background {
+  user-select: none;
+
+}
+
+.background_1 {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0093e9, #80d0c7);
+}
+
+.background_2 {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  animation: moon 20s ease -1.25s infinite;
+  background: linear-gradient(to bottom, #141414, #003654);
+}
+
+.background_2 > * {
+  opacity: 100;
+}
+
+.sun_1 {
+  position: fixed;
+  top: -50vh;
+  left: 50vw;
+  width: 100vw;
+  height: 100vh;
+  clip-path: circle(14% at 50% 50%);
+  background-color: rgb(255, 162, 0);
+}
+.sun_2 {
+  position: fixed;
+  top: -50vh;
+  left: 50vw;
+  width: 100vw;
+  height: 100vh;
+  clip-path: circle(15% at 50% 50%);
+  background: radial-gradient(circle, rgba(255, 242, 0, 0.6), rgba(255, 125, 0, 0.9));
+}
+.cloud_1 {
+  position: fixed;
+  top: 5vh;
+  left: -10vw;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(240, 248, 255, 0.684);
+  animation: swell 9s ease -1.25s infinite;
+  clip-path: ellipse(40% 15% at 50% 100%);
+}
+.cloud_2 {
+  position: fixed;
+  top: 5vh;
+  left: 60vw;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(213, 213, 213, 0.781);
+  clip-path: ellipse(40% 15% at 50% 100%);
+  animation: swell 8s ease -1.25s infinite;
+}
+.cloud_3 {
+  position: fixed;
+  top: 5vh;
+  left: 30vw;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(238, 238, 238, 0.781);
+  clip-path: ellipse(40% 15% at 50% 100%);
+  animation: swell 7s ease -1.25s infinite;
+}
+.cloud_4 {
+  position: fixed;
+  top: 5vh;
+  left: -30vw;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.729);
+  clip-path: ellipse(40% 15% at 50% 100%);
+  animation: swell 7s ease -1.25s infinite;
+}
+@keyframes swell {
+  0%,
+  100% {
+    transform: translate3d(0, 2rem, 0);
+  }
+  50% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes moon {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 100;
+  }
+}
