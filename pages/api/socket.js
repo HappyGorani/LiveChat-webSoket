@@ -1,6 +1,8 @@
-import { Server } from "Socket.IO";
+import { Server } from "socket.io";
 import { getChat, saveChat } from "../../helper/chatData-API";
 
+
+//broadcast.emit :: 소켓 본인에겐 제외하고 뿌림
 const socketHandler = (req, res) => {
   if (res.socket.server.io) {
     console.log("연결되었습니다.");
@@ -13,11 +15,11 @@ const socketHandler = (req, res) => {
         const chat = { sixIp: data.sixIp, text: data.text };
         await saveChat(chat);
         const newData = await getChat();
-        socket.broadcast.emit("updateMessage", newData);
+        socket.emit("updateMessage", newData);
       });
       socket.on("loadingMessage", async () => {
         const newData = await getChat();
-        socket.broadcast.emit("updateMessage", newData);
+        socket.emit("updateMessage", newData);
       });
     });
   }
