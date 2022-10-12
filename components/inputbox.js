@@ -34,7 +34,6 @@ function InputBox() {
     const enteredUserInput = userInput.current.value;
     socket.emit("newMessage", { text: enteredUserInput, sixIp: sixIp });
   };
-  console.log(messageData);
   return (
     <>
       <h1>라이브채팅</h1>
@@ -45,9 +44,9 @@ function InputBox() {
       <hr />
       <ul>
         {messageData.map((data) => (
-          <li key={data.createAt}>
-            {data.sixIp}
-            {data.text}
+          <li key={data._id}>
+            {data.chat.sixIp}
+            {data.chat.text}
           </li>
         ))}
       </ul>

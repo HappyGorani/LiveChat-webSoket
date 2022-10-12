@@ -6,5 +6,6 @@ export const getSixIp = () => {
       ip.length = 2;
       return `${ip[0]}.${ip[1]}`;
     });
+
   return sixIp;
 };

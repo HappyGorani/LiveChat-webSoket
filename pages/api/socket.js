@@ -1,4 +1,6 @@
 import { Server } from "Socket.IO";
+import { getChat, saveChat } from "../../helper/chatData-API";
+
 const dummyData = [];
 const socketHandler = (req, res) => {
   if (res.socket.server.io) {
@@ -8,12 +10,15 @@ const socketHandler = (req, res) => {
     const io = new Server(res.socket.server);
     res.socket.server.io = io;
     io.on("connection", (socket) => {
-      socket.on("newMessage", (data) => {
-        dummyData.push({ sixIp: data.sixIp, text: data.text, createAt: new Date() });
-        socket.broadcast.emit("updateMessage", dummyData);
+      socket.on("newMessage", async (data) => {
+        const chat = { sixIp: data.sixIp, text: data.text };
+        await saveChat(chat);
+        const newData = await getChat();
+        socket.broadcast.emit("updateMessage", newData);
       });
-      socket.on("loadingMessage", () => {
-        socket.emit("updateMessage", dummyData);
+      socket.on("loadingMessage", async () => {
+        const newData = await getChat();
+        socket.broadcast.emit("updateMessage", newData);
       });
     });
   }
