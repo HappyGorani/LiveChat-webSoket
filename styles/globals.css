@@ -18,7 +18,14 @@ a {
 * {
   box-sizing: border-box;
 }
-
+.card {
+  margin: 0 auto;
+  background-color: white;
+}
+.card h2 {
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

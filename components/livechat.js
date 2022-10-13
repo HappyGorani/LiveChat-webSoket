@@ -13,6 +13,8 @@ let socket;
 function LiveChat() {
   const [messageData, setMessageData] = useState([]);
   const [sixIp, setSixIp] = useState("");
+  const [connectingState, setConnectingState] = useState(false);
+  const [isEmpty, setisEmpty] = useState(false);
   const userInputRef = useRef(null);
   const messageScrollRef = useRef();
 
@@ -24,6 +26,7 @@ function LiveChat() {
 
     socket.on("connect", () => {
       console.log("연결됨");
+      setConnectingState(true);
       socket.emit("loadingMessage");
     });
 
@@ -39,12 +42,19 @@ function LiveChat() {
   useEffect(() => {
     autoScroll();
   }, [messageData]);
+
   const autoScroll = () => {
     messageScrollRef.current.scrollTop = messageScrollRef.current.scrollHeight;
   };
+
   const sendMessageHandler = (e) => {
     e.preventDefault();
     const enteredUserInput = userInputRef.current.value;
+    if (enteredUserInput.trim().length === 0) {
+      setisEmpty(true);
+      return;
+    }
+    setisEmpty(false);
     socket.emit("newMessage", { text: enteredUserInput, sixIp: sixIp });
     userInputRef.current.value = "";
     autoScroll();
@@ -54,9 +64,19 @@ function LiveChat() {
     <>
       <Background />
       <div className={styles.components}>
-        <h2>LiveChat</h2>
-        <MessageList messageData={messageData} ref={messageScrollRef} />
-        <InputBox sendMessageHandler={sendMessageHandler} ref={userInputRef} />
+        {!connectingState && <h2>연결중</h2>}
+        {connectingState && <h2>LiveChat</h2>}
+        <MessageList
+          messageData={messageData}
+          ref={messageScrollRef}
+          connectingState={connectingState}
+        />
+        <InputBox
+          sendMessageHandler={sendMessageHandler}
+          ref={userInputRef}
+          connectingState={connectingState}
+          isEmpty={isEmpty}
+        />
       </div>
     </>
   );

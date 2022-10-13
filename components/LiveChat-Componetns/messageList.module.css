@@ -1,14 +1,17 @@
 .message-list {
+  display: flex;
+  flex-direction: column;
   height: 60vh;
   margin: 0;
   padding: 0 1rem;
-
+  user-select: none;
   background-color: rgba(255, 255, 255, 0.7);
   list-style: none;
   overflow-y: scroll;
   scroll-behavior: contain;
 }
 .message-list li {
+  color: black;
   display: flex;
   flex-direction: column;
   margin: 0.35rem 0;

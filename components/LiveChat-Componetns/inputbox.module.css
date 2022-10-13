@@ -7,13 +7,32 @@
   border-radius: 0 0 1rem 1rem;
   background-color: white;
 }
-.inputbox input {
+.input {
   height: 100%;
   border: none;
   outline: none;
   padding: 0 0.5rem;
   border-radius: 0 0 0 1rem;
+  color: black;
+  background-color: white;
   width: 90%;
+}
+.input-disabled {
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 0.5rem;
+  border-radius: 0 0 0 1rem;
+  color: black;
+  background-color: white;
+  width: 90%;
+  cursor: wait;
+}
+.input::placeholder {
+  text-align: center;
+}
+.input-disabled::placeholder {
+  text-align: center;
 }
 .inputbox button {
   height: 100%;

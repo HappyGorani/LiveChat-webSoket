@@ -1,32 +1,32 @@
 
 
-# FROM node:latest
+FROM node:latest
 
-# RUN mkdir /app
+RUN mkdir /app
 
-# WORKDIR /app
+WORKDIR /app
 
-# RUN mkdir /.next
+RUN mkdir /.next
 
-# COPY ./.next ./.next
+COPY ./.next ./.next
 
-# COPY package.json ./
+COPY package.json ./
 
-# COPY package-lock.json ./
+COPY package-lock.json ./
 
-# RUN npm install
+RUN npm install
 
-# EXPOSE 15777
+EXPOSE 15777
 
-# CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start"]
 
 
-FROM nginx
+# FROM nginx
 
-RUN rm /etc/nginx/conf.d/default.conf
+# RUN rm /etc/nginx/conf.d/default.conf
 
-COPY ./ngnix.conf /etc/nginx/conf.d
+# COPY ./ngnix.conf /etc/nginx/conf.d
 
-EXPOSE 80
+# EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]

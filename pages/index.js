@@ -1,6 +1,6 @@
 import Head from "next/head";
 import LiveChat from "../components/livechat";
-import styles from "../styles/Home.module.css";
+
 
 export default function Home() {
   return (
