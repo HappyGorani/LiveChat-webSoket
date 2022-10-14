@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
 let db;
 export const connectDB = async (databaseName) => {
-  const client = await MongoClient.connect("mongodb://172.17.0.1:27017");
-  // const client = await MongoClient.connect("mongodb://localhost:27017");
+  // const client = await MongoClient.connect("mongodb://172.17.0.1:27017");
+  const client = await MongoClient.connect("mongodb://localhost:27017");
   db = client.db(databaseName);
 };
 export const getDB = () => {

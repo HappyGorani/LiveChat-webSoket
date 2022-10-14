@@ -15,6 +15,7 @@ function LiveChat() {
   const [sixIp, setSixIp] = useState("");
   const [connectingState, setConnectingState] = useState(false);
   const [isEmpty, setisEmpty] = useState(false);
+
   const userInputRef = useRef(null);
   const messageScrollRef = useRef();
 
