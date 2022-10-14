@@ -1,7 +1,6 @@
 import { Server } from "socket.io";
 import { getChat, saveChat } from "../../helper/chatData-API";
 
-
 //broadcast.emit :: 소켓 본인에겐 제외하고 뿌림
 const socketHandler = (req, res) => {
   if (res.socket.server.io) {
@@ -16,6 +15,7 @@ const socketHandler = (req, res) => {
         await saveChat(chat);
         const newData = await getChat();
         socket.emit("updateMessage", newData);
+        socket.broadcast.emit("updateMessage", newData);
       });
       socket.on("loadingMessage", async () => {
         const newData = await getChat();

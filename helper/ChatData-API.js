@@ -14,7 +14,7 @@ export const getChat = async () => {
 export const saveChat = async (chat) => {
   try {
     await connectDB("livechat");
-    getDB().collection("chat").insertOne({ chat, expiredAt: new Date() });
+    getDB().collection("chat").insertOne({ chat, createdAt: new Date() });
   } catch (error) {
     // console.log("saveChat에 문제가 있습니다." + "::" + error);
     throw { message: error };
